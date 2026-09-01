@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gray–Scott on a walking animal — moving-domain reaction–diffusion</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <aside id="panel" class="card">
+      <h1>Gray–Scott on a moving domain</h1>
+      <p class="subtitle">walking quadruped · surface Laplace–Beltrami (rest pose) · explicit Euler</p>
+
+      <div class="equations">
+        <div>∂<sub>t</sub>u = D<sub>u</sub>∇²u − uv² + F(1−u)</div>
+        <div>∂<sub>t</sub>v = D<sub>v</sub>∇²v + uv² − (F+k)v</div>
+      </div>
+
+      <section>
+        <h2>Model</h2>
+        <select id="sel-model"></select>
+      </section>
+
+      <section class="controls">
+        <h2>Parameters</h2>
+        <label>F — feed <output id="out-F"></output>
+          <input id="in-F" type="range" min="0.010" max="0.090" step="0.0005" />
+        </label>
+        <label>k — kill <output id="out-k"></output>
+          <input id="in-k" type="range" min="0.040" max="0.075" step="0.0005" />
+        </label>
+        <label>D<sub>u</sub> <output id="out-Du"></output>
+          <input id="in-Du" type="range" min="0.2" max="2.0" step="0.05" />
+        </label>
+        <label>D<sub>v</sub> <output id="out-Dv"></output>
+          <input id="in-Dv" type="range" min="0.1" max="2.0" step="0.05" />
+        </label>
+        <label>Δt <output id="out-dt"></output>
+          <input id="in-dt" type="range" min="0.1" max="1.0" step="0.05" />
+        </label>
+        <label>steps/frame <output id="out-substeps"></output>
+          <input id="in-substeps" type="range" min="1" max="30" step="1" />
+        </label>
+      </section>
+
+      <section>
+        <h2>Presets (F, k)</h2>
+        <div class="button-row" id="presets"></div>
+      </section>
+
+      <section>
+        <h2>Controls</h2>
+        <div class="button-row">
+          <button id="btn-perturb">Perturb</button>
+          <button id="btn-reset">Reset</button>
+          <button id="btn-pause">Pause</button>
+          <button id="btn-walk">Walk: on</button>
+          <button id="btn-rotate">Turntable: off</button>
+        </div>
+        <label class="walk-speed">walk speed <output id="out-walkSpeed"></output>
+          <input id="in-walkSpeed" type="range" min="0" max="2" step="0.05" />
+        </label>
+      </section>
+
+      <section class="stats">
+        <h2>State</h2>
+        <dl id="stats">
+          <div><dt>iteration</dt><dd id="st-iter">0</dd></div>
+          <div><dt>fps</dt><dd id="st-fps">—</dd></div>
+          <div><dt>v range</dt><dd id="st-vrange">—</dd></div>
+          <div><dt>vertices</dt><dd id="st-verts">—</dd></div>
+          <div><dt>triangles</dt><dd id="st-tris">—</dd></div>
+          <div><dt>Δt max (stability)</dt><dd id="st-dtmax">—</dd></div>
+          <div><dt>sim cost / frame</dt><dd id="st-cost">—</dd></div>
+        </dl>
+      </section>
+    </aside>
+
+    <figure id="colourbar" class="card">
+      <div class="bar" id="colourbar-bar"></div>
+      <div class="ticks">
+        <span id="cb-hi">0.50</span>
+        <span id="cb-mid">0.25</span>
+        <span id="cb-lo">0.00</span>
+      </div>
+      <figcaption>v (activator)</figcaption>
+    </figure>
+
+    <p id="note">
+      Note: ∇² is assembled on the rest pose and the field is advected with the
+      animated surface — the standard approximation for RD on deforming domains.
+      Colour normalises v against its live range so the pattern always spans the
+      full viridis colourmap. Model credits/licences:
+      <a href="https://quaternius.com">Quaternius</a> (cat, CC0), PixelMannen /
+      tomkranis / AsoboStudio (fox, CC0/CC-BY) — see public/models/ATTRIBUTION.txt.
+    </p>
+
+    <div id="loading"><div class="spinner"></div><p>assembling Laplace–Beltrami operator…</p></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+cat.fbx
+-------
+Source:  "Animal Pack Vol.2 by @Quaternius" — animated low-poly animals (Cat, Dog, Wolf, Eagle, Piranha)
+Author:  Quaternius (https://quaternius.com)
+Fetched: https://opengameart.org/content/animated-animales-low-poly
+Licence: CC0 / Public Domain (https://creativecommons.org/publicdomain/zero/1.0/)
+
+Contains "CatArmature|Walking" and "CatArmature|Idle" animation clips.
+
+fox.glb
+-------
+Source:  Khronos glTF-Sample-Assets "Fox"
+         (https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/Fox)
+Notes:   Textures stripped and unused data pruned (scripts/strip-fox.mjs);
+         this app renders vertex colours.
+Contains "Survey", "Walk" and "Run" animation clips.
+
+Credits (per the upstream README):
+ - Model:              © 2014 PixelMannen, CC0 / Public Domain
+ - Rigging & animation: © 2014 tomkranis, CC-BY 4.0
+                        (https://creativecommons.org/licenses/by/4.0/legalcode)
+ - glTF conversion:    © 2017 @AsoboStudio and @scurest, CC-BY 4.0
+                        (https://creativecommons.org/licenses/by/4.0/legalcode)
